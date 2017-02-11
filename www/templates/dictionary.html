@@ -1,0 +1,37 @@
+<ion-view hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons" hide-back-button="true">
+
+    <ion-content has-header="true" padding="true" scroll="false">
+        <div class="row item item-input" style="background-color:#DADADA;">
+            <div class="col-90">
+        <label class="item-input" style="background-color:white;">
+            <input type="text" placeholder="Search" id="searchs" ng-model="MainObj.search" ng-change="onchangeSearch(MainObj.search)"> 
+        </label>
+        </div>
+            <div class="col text-right">
+                    <i class="ion-star" ng-class="color"  ng-click="changeColor()" style="font-size: 30px"></i>  
+            </div>
+        </div>
+        <ion-list ng-hide="hideResult">
+            <ion-item ng-repeat="item in Json | SearchFilter:searching | limitTo:5" ng-click="gotoSelectedItem(item)">
+                {{item.word}}
+            </ion-item>
+        </ion-list>
+      
+        <div class="list" ng-show="hideResult" style="padding-top:10px;">
+            <div class="item item-divider">
+                Results
+            </div>
+            <div class="item item-divider" ng-if="MainObj.selectedItem.cm.length>0">
+               <label style="color:red;">{ {{selectedItem.cm}} }</label>
+            </div>
+              <ion-scroll zooming="false" direction="y" style="height: 420px;">
+            <a class="item" ng-show="MainObj.selectedItem.splitValues.length>0" ng-click="splitValueClick(item)" ng-repeat="item in MainObj.selectedItem.splitValues"
+                ng-if="item.length>0">{{item}}</a>
+                </ion-scroll>
+        </div>
+        
+    </ion-content>
+
+</ion-view>
+
+<!--title="navTitle" -->
